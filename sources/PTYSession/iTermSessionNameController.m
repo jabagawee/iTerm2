@@ -224,14 +224,17 @@ NSString *const iTermSessionNameControllerSystemTitleUniqueIdentifier = @"com.it
 - (void)logMessage:(NSString *)message invocation:(NSString *)invocation {
     NSError *invocationError = nil;
     NSString *signature = [iTermExpressionParser signatureForFunctionCallInvocation:invocation error:&invocationError];
-    if (signature) {
-        [[iTermAPIHelper sharedInstance] logToConnectionHostingFunctionWithSignature:signature
-                                                                              string:message];
+    if (!signature) {
+        message = [NSString stringWithFormat:@"Malformed invocation in session name controller. The invocation is:\n%@\nIt doesn't look like a function call! The parser said:\n%@",
+                   invocation,
+                   invocationError.localizedDescription];
+    }
+    iTermAPIHelper *apiHelper = [iTermAPIHelper sharedInstanceIfEnabled];
+    if (apiHelper) {
+        [apiHelper logToConnectionHostingFunctionWithSignature:signature
+                                                        string:message];
     } else {
-        [[iTermAPIHelper sharedInstance] logToConnectionHostingFunctionWithSignature:nil
-                                                                              format:@"Malformed invocation in session name controller. The invocation is:\n%@\nIt doesn't look like a function call! The parser said:\n%@",
-         invocation,
-         invocationError.localizedDescription];
+        XLog(@"%@", message);
     }
 }
 
