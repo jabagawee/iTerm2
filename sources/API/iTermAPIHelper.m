@@ -1410,7 +1410,7 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
 }
 
 + (ITMRPCRegistrationRequest *)registrationRequestForStatusBarComponentWithUniqueIdentifier:(NSString *)uniqueIdentifier {
-    return [[[self sharedInstance] statusBarComponentProviderRegistrationRequests] objectPassingTest:^BOOL(ITMRPCRegistrationRequest *request, NSUInteger index, BOOL *stop) {
+    return [[self statusBarComponentProviderRegistrationRequests] objectPassingTest:^BOOL(ITMRPCRegistrationRequest *request, NSUInteger index, BOOL *stop) {
         return [request.statusBarComponentAttributes.uniqueIdentifier isEqualToString:uniqueIdentifier];
     }];
 }

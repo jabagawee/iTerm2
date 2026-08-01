@@ -441,8 +441,8 @@ static NSString *const iTermStatusBarRPCRegistrationRequestV2Key = @"registratio
                      self.invocation,
                      error.localizedDescription,
                      error.localizedFailureReason ? [@"\n\n" stringByAppendingString:error.localizedFailureReason] : @""];
-    [[iTermAPIHelper sharedInstance] logToConnectionHostingFunctionWithSignature:_savedRegistrationRequest.latestStatusBarRequest.it_stringRepresentation
-                                                                          string:_errorMessage];
+    [[iTermAPIHelper sharedInstanceIfEnabled] logToConnectionHostingFunctionWithSignature:_savedRegistrationRequest.latestStatusBarRequest.it_stringRepresentation
+                                                                                   string:_errorMessage];
     _variants = @[ @"🐞" ];
     _missingFunctions = [missingFunctions mutableCopy];
     [self.delegate updateTextFieldIfNeeded];

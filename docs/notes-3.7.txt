@@ -2350,3 +2350,7 @@ Bug Fixes:
   reprocessed to build each request, so the
   per-message work stays small no matter how
   long the conversation gets.
+- A profile with a status bar component
+  provided by a Python script no longer
+  triggers the “Enable Python API?” prompt
+  when the Python API is turned off.
