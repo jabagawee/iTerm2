@@ -62,10 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Queue Safety Assertions
 
 + (void)assertMainQueueSafe;
-+ (void)assertMainQueueSafe:(NSString *)message, ...;
++ (void)assertMainQueueSafe:(NSString *)message, ... NS_FORMAT_FUNCTION(1,2);
 
 + (void)assertMutationQueueSafe;
-+ (void)assertMutationQueueSafe:(NSString *)message, ...;
++ (void)assertMutationQueueSafe:(NSString *)message, ... NS_FORMAT_FUNCTION(1,2);
 
 + (void)setMainQueueSafe:(BOOL)safe;
 

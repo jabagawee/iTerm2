@@ -12,6 +12,7 @@
 #import "iTermVariablesIndex.h"
 #import "NSDictionary+iTerm.h"
 
+NS_FORMAT_FUNCTION(2,3)
 NSError *iTermMethodCallError(iTermAPIHelperErrorCode code,
                               NSString *format,
                               ...) {

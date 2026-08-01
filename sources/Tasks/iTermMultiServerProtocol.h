@@ -277,7 +277,7 @@ iTermMultiServerProtocolGetFileDescriptor(iTermClientServerProtocolMessage *mess
 void
 iTermMultiServerProtocolLogMessageFromClient(iTermMultiServerClientOriginatedMessage *message);
 
-typedef void iTermMultiServerProtocolLogFunction(const char *file, int line, const char *func, const char *format, ...);
+typedef void iTermMultiServerProtocolLogFunction(const char *file, int line, const char *func, const char *format, ...) __attribute__((format(printf, 4, 5)));
 
 void
 iTermMultiServerProtocolLogMessageFromClient(iTermMultiServerClientOriginatedMessage *message);

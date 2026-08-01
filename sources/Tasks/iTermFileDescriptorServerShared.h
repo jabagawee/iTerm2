@@ -18,7 +18,7 @@ typedef union {
     char control[CMSG_SPACE(sizeof(int))];
 } iTermFileDescriptorControlMessage;
 
-void iTermFileDescriptorServerLog(char *format, ...);
+void iTermFileDescriptorServerLog(char *format, ...) __attribute__((format(printf, 1, 2)));
 int iTermFileDescriptorServerAcceptAndClose(int socketFd);
 int iTermFileDescriptorServerAccept(int socketFd);
 void SetRunningServer(void);

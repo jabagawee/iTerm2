@@ -249,7 +249,7 @@ BOOL TurnOffDebugLoggingSilently(void);
 void TurnOnDebugLoggingAutomatically(void);
 
 void SetPinnedDebugLogMessage(NSString *key, NSString *value, ...) NS_FORMAT_FUNCTION(2,3);
-void AppendPinnedDebugLogMessage(NSString *key, NSString *value, ...);
+void AppendPinnedDebugLogMessage(NSString *key, NSString *value, ...) NS_FORMAT_FUNCTION(2,3);
 
 _Noreturn NS_INLINE void iTermCrashWithMessage(const char *file,
                                                int line,
@@ -261,7 +261,7 @@ _Noreturn NS_INLINE void iTermCrashWithMessage(const char *file,
 @interface NSException(iTerm)
 @property (nonatomic, readonly) NSArray<NSString *> *it_originalCallStackSymbols;
 @property (nonatomic, readonly) NSString *it_compressedDescription;
-- (NSException *)it_rethrowWithMessage:(NSString *)format, ...;
+- (NSException *)it_rethrowWithMessage:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 @end
 
 #endif  // __OBJC__

@@ -25,7 +25,7 @@
     CVectorDestroy(&_incidentals);
 }
 
-- (VT100Token *)tokenForDataWithFormat:(NSString *)formatString, ... {
+- (VT100Token *)tokenForDataWithFormat:(NSString *)formatString, ... NS_FORMAT_FUNCTION(1,2) {
     va_list args;
     va_start(args, formatString);
     NSString *string = [[[NSString alloc] initWithFormat:formatString arguments:args] autorelease];

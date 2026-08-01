@@ -12,7 +12,7 @@ int iTermFileDescriptorServerRun(char *path, pid_t childPid, int connectionFd);
 // suitable to pass to iTermFileDescriptorServerRun() in |connectionFd|.
 int iTermFileDescriptorServerAcceptAndClose(int socketFd);
 
-void iTermFileDescriptorServerLog(char *format, ...);
+void iTermFileDescriptorServerLog(char *format, ...) __attribute__((format(printf, 1, 2)));
 
 void SetRunningServer(void);
 

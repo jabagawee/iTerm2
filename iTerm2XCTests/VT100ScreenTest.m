@@ -506,7 +506,7 @@ NSLog(@"Known bug: %s should be true, but %s is.", #expressionThatShouldBeTrue, 
 
 }
 
-- (void)sendStringToTerminalWithFormat:(NSString *)formatString, ... {
+- (void)sendStringToTerminalWithFormat:(NSString *)formatString, ... NS_FORMAT_FUNCTION(1,2) {
     va_list args;
     va_start(args, formatString);
     NSString *string = [[[NSString alloc] initWithFormat:formatString arguments:args] autorelease];

@@ -14,7 +14,8 @@
 #include <syslog.h>
 #include <unistd.h>
 
-static inline void CDLogImpl(const int level, const char *func, const char *file, int line, const char *format, ...) {
+static inline __attribute__((format(printf, 5, 6)))
+void CDLogImpl(const int level, const char *func, const char *file, int line, const char *format, ...) {
 #if !ITERM_SERVER && !ITERM_XPC
 #if DEBUG
     // Because xcode is hot garbage, syslog(LOG_DEBUG) goes to its console so we turn that off for debug builds.
@@ -40,7 +41,7 @@ static inline void CDLogImpl(const int level, const char *func, const char *file
     asprintf(&temp, "pidinfo(pid=%d) %s:%d %s: %s", getpid(), file, line, func, format);
     vsyslog(level, temp, args);
 #else  // ITERM_SERVER
-    extern void DLogC(const char *format, va_list args);
+    extern void DLogC(const char *format, va_list args) __attribute__((format(printf, 1, 0)));
     asprintf(&temp, "iTermClient(pid=%d) %s:%d %s: %s", getpid(), file, line, func, format);
     DLogC(temp, args);
 #endif  // ITERM_SERVER

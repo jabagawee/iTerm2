@@ -16,6 +16,7 @@
 #import "NSDictionary+Profile.h"
 #import "iTerm2SharedARC-Swift.h"
 
+NS_FORMAT_FUNCTION(2,3)
 static void APSWriteToScriptHistory(id<iTermAutomaticProfileSwitcherDelegate> delegate,
                                     NSString *format, ...) {
     if (![iTermUserDefaults enableAutomaticProfileSwitchingLogging]) {

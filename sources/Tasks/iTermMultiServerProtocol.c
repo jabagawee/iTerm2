@@ -642,11 +642,11 @@ static ssize_t Read(int fd,
             n = read(fd, buffer + offset, length - offset);
         } while (n < 0 && errno == EINTR);
         if (n <= 0) {
-            FDLog(LOG_DEBUG, "read returned %d: %s", n, errno ? strerror(errno) : "EOF");
+            FDLog(LOG_DEBUG, "read returned %zd: %s", n, errno ? strerror(errno) : "EOF");
             return n;
         }
         offset += n;
-        FDLog(LOG_DEBUG, "read returned %d. Have read %d/%d", n, (int)offset, (int)length);
+        FDLog(LOG_DEBUG, "read returned %zd. Have read %zd/%zu", n, offset, length);
     }
 
     return offset;
@@ -764,6 +764,7 @@ iTermMultiServerProtocolLogMessageFromClient2(iTermMultiServerClientOriginatedMe
     }
 }
 
+__attribute__((format(printf, 4, 5)))
 static void FDLogWrapper(const char *file, int line, const char *func, const char *format, ...) {
     va_list args;
     va_start(args, format);
@@ -775,7 +776,7 @@ static void FDLogWrapper(const char *file, int line, const char *func, const cha
 #else
     // Because xcode is hot garbage, syslog(LOG_DEBUG) goes to its console so we turn that off for debug builds.
 #if !DEBUG
-    extern void DLogC(const char *format, va_list args);
+    extern void DLogC(const char *format, va_list args) __attribute__((format(printf, 1, 0)));
     asprintf(&temp, "iTermClient(pid=%d) %s:%d %s: %s", getpid(), file, line, func, format);
     DLogC(temp, args);
 #endif  // DEBUG

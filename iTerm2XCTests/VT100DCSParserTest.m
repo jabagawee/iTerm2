@@ -37,7 +37,7 @@
     [self setUp];
 }
 
-- (VT100Token *)tokenForDataWithFormat:(NSString *)formatString, ... {
+- (VT100Token *)tokenForDataWithFormat:(NSString *)formatString, ... NS_FORMAT_FUNCTION(1,2) {
     va_list args;
     va_start(args, formatString);
     NSString *string = [[[NSString alloc] initWithFormat:formatString arguments:args] autorelease];
@@ -218,7 +218,7 @@
 }
 
 - (void)testDCSPassthroughST {
-    VT100Token *token = [self tokenForDataWithFormat:@"%cPAbcd%c%\\", VT100CC_ESC, VT100CC_ESC];
+    VT100Token *token = [self tokenForDataWithFormat:@"%cPAbcd%c\\", VT100CC_ESC, VT100CC_ESC];
     XCTAssert(token->type == VT100_NOTSUPPORT);
     XCTAssert(_parser.state == kVT100DCSStateGround);
     XCTAssert([_parser.data isEqualToString:@"Abcd"]);
@@ -312,7 +312,7 @@
     // Test an empty line split in two.
     token = [self tokenForDataWithFormat:@"\r"];
     XCTAssert(token->type == VT100_WAIT);
-    token = [self tokenForDataWithFormat:@"\n", s];
+    token = [self tokenForDataWithFormat:@"\n"];
     XCTAssert(token->type == TMUX_LINE);
     XCTAssertEqualObjects(token.string, @"");
 

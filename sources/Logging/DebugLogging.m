@@ -342,6 +342,7 @@ void iTermFatalError(NSString *s) {
 }
 
 
+__attribute__((format(printf, 4, 5)))
 int CDebugLogImpl(const char *file, int line, const char *function, const char *format, ...) {
     va_list args;
     va_start(args, format);
@@ -546,6 +547,7 @@ void ToggleDebugLogging(void) {
     }
 }
 
+__attribute__((format(printf, 1, 0)))
 void DLogC(const char *format, va_list args) {
     char *temp = NULL;
     vasprintf(&temp, format, args);

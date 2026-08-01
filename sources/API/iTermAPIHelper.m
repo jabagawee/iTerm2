@@ -321,6 +321,11 @@ static BOOL iTermAPIHelperLastApplescriptAuthRequiredSetting;
 
 @end
 
+@interface iTermAPIHelper ()
+- (void)logToConnectionWithKey:(NSString *)connectionKey
+                        format:(NSString *)format, ... NS_FORMAT_FUNCTION(2,3);
+@end
+
 @implementation iTermAPIHelper {
     iTermAPIServer *_apiServer;
     BOOL _layoutChanged;
